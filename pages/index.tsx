@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../components/layout";
 import { NextPage } from "next";
-import { PortfolioApi } from "../services/portfolio";
+import { fetchHomePageById } from "../services/portfolio";
 import { HomePage } from "../services/portfolio.types";
 import { Grid } from "@material-ui/core";
 import { Introduction } from "../components/Introduction";
@@ -39,8 +39,7 @@ const Home: NextPage<HomePage> = ({
 };
 
 Home.getInitialProps = async (ctx) => {
-  const api = new PortfolioApi();
-  return await api.fetchHomePageById("12oQYUyzJOGG8He6aPUMJN");
+  return await fetchHomePageById("12oQYUyzJOGG8He6aPUMJN");
 };
 
 export default Home;
