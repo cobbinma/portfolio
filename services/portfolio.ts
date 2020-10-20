@@ -63,7 +63,7 @@ const convertProjectsPage = (rawData): ProjectsPage => {
         id: project.fields?.id,
         title: project.fields?.title,
         description: project.fields?.description,
-        link: project.fields?.url,
+        link: project.fields?.link,
         picture: {
           url: project.fields?.picture?.fields.file.url.replace(
             "//",
