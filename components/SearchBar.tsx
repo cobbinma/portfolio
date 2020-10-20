@@ -9,7 +9,6 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       position: "relative",
       zIndex: 1,
-      width: 500,
       "& > * + *": {
         marginTop: theme.spacing(3),
       },
@@ -38,6 +37,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ options, setOptions }) => {
       <Autocomplete
         multiple
         id="search"
+        style={{ width: 350 }}
         options={options}
         onChange={(e, v) => {
           // @ts-ignore
