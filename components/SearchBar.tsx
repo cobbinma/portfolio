@@ -40,6 +40,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ options, setOptions }) => {
         id="search"
         options={options}
         onChange={(e, v) => {
+          // @ts-ignore
           setOptions(v);
         }}
         getOptionLabel={(option) => option.title}
