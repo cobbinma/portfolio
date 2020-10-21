@@ -1,3 +1,7 @@
+# COBBING.DEV
+
+[![avataaars.png](https://i.postimg.cc/rwmx0zSn/avataaars.png)](https://postimg.cc/6ykyFWbn)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
