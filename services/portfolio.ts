@@ -40,14 +40,14 @@ const convertHomePage = (rawData): HomePage => {
     secondName: fields.secondName,
     introduction: fields.introduction,
     avatar: {
-      url: fields.avatar?.fields?.file.url.replace("//", "http://"),
+      url: fields.avatar?.fields?.file.url.replace("//", "https://"),
     },
     socials: fields.socials?.map(
       (social): Social => ({
         id: social.fields?.id,
         name: social.fields?.name,
         logo: {
-          url: social.fields?.logo?.fields.file.url.replace("//", "http://"),
+          url: social.fields?.logo?.fields.file.url.replace("//", "https://"),
         },
         url: social.fields?.url,
       })
@@ -67,7 +67,7 @@ const convertProjectsPage = (rawData): ProjectsPage => {
         picture: {
           url: project.fields?.picture?.fields.file.url.replace(
             "//",
-            "http://"
+            "https://"
           ),
         },
         technologies: project.fields?.technologies.map(

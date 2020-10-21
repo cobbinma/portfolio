@@ -55,7 +55,7 @@ const Projects: NextPage<ProjectsPage> = ({ projects, technologies }) => {
               setOptions={setSelectedTechnologies}
             />
           </Grid>
-          <Grid item xs={12} sm={10} md={8}>
+          <Grid item xs={11} sm={10} md={8}>
             <Grid
               container
               spacing={2}
