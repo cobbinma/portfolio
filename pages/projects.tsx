@@ -61,7 +61,7 @@ const Projects: NextPage<ProjectsPage> = ({ projects, technologies }) => {
               spacing={2}
               direction="row"
               justify="center"
-              alignItems="flex-start"
+              alignItems="stretch"
             >
               {projects
                 .filter((project: ProjectType) => {

@@ -13,8 +13,18 @@ import { red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    root: {
+      display: "flex",
+      height: "100%",
+      flexWrap: "wrap",
+    },
+    body: {
+      width: "100%",
+      flex: "1 0 auto",
+      justifyContent: "center",
+    },
     media: {
-      height: 0,
+      width: "100%",
       paddingTop: "56.25%", // 16:9
     },
     expand: {
@@ -27,8 +37,8 @@ const useStyles = makeStyles((theme: Theme) =>
     expandOpen: {
       transform: "rotate(180deg)",
     },
-    avatar: {
-      backgroundColor: red[500],
+    actions: {
+      alignSelf: "flex-end",
     },
   })
 );
@@ -41,15 +51,21 @@ const Project: React.FC<ProjectType> = ({
 }) => {
   const classes = useStyles();
   return (
-    <Card>
-      <CardHeader title={title} />
-      <CardMedia className={classes.media} image={picture.url} title={title} />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {description}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
+    <Card className={classes.root}>
+      <div className={classes.body}>
+        <CardHeader title={title} />
+        <CardMedia
+          className={classes.media}
+          image={picture.url}
+          title={title}
+        />
+        <CardContent>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {description}
+          </Typography>
+        </CardContent>
+      </div>
+      <CardActions className={classes.actions} disableSpacing>
         <IconButton aria-label="github link" href={link}>
           <GitHubIcon />
         </IconButton>
