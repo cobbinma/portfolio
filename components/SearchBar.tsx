@@ -27,9 +27,14 @@ const useStyles = makeStyles((theme: Theme) =>
 export interface SearchBarProps {
   options: Technology[];
   setOptions: React.Dispatch<React.SetStateAction<Technology[] | null>>;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ options, setOptions }) => {
+const SearchBar: React.FC<SearchBarProps> = ({
+  options,
+  setOptions,
+  setPage,
+}) => {
   const classes = useStyles();
 
   return (
@@ -40,6 +45,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ options, setOptions }) => {
         style={{ width: 350 }}
         options={options}
         onChange={(e, v) => {
+          setPage(1);
           // @ts-ignore
           setOptions(v);
         }}

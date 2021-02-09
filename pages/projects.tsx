@@ -11,14 +11,22 @@ import { Grid, Theme, Typography } from "@material-ui/core";
 import { createStyles, makeStyles } from "@material-ui/styles";
 import Project from "../components/Project";
 import SearchBar from "../components/SearchBar";
+import { Pagination } from "@material-ui/lab";
+
+const PAGE_PROJECT_COUNT = 3;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     title: {
-      color: theme.palette.primary.main,
+      color: theme.palette.secondary.main,
       marginTop: 15,
       fontWeight: 800,
       textTransform: "uppercase",
+    },
+    ul: {
+      "& .MuiPaginationItem-root": {
+        color: "#fff",
+      },
     },
   })
 );
@@ -28,6 +36,17 @@ const Projects: NextPage<ProjectsPage> = ({ projects, technologies }) => {
   const [selectedTechnologies, setSelectedTechnologies] = useState<
     Technology[] | null
   >([]);
+  const [page, setPage] = useState<number>(1);
+
+  const viewProjects = projects.filter((project: ProjectType) => {
+    if (selectedTechnologies == null || selectedTechnologies.length === 0)
+      return true;
+    return selectedTechnologies.every((tech) => {
+      return project.technologies
+        .map((tech) => tech.title)
+        .includes(tech.title);
+    });
+  });
 
   return (
     <Layout>
@@ -40,12 +59,7 @@ const Projects: NextPage<ProjectsPage> = ({ projects, technologies }) => {
           spacing={3}
         >
           <Grid item xs={12}>
-            <Typography
-              className={classes.title}
-              color="primary"
-              variant="h1"
-              component="h1"
-            >
+            <Typography className={classes.title} variant="h1" component="h1">
               Projects
             </Typography>
           </Grid>
@@ -53,6 +67,7 @@ const Projects: NextPage<ProjectsPage> = ({ projects, technologies }) => {
             <SearchBar
               options={technologies}
               setOptions={setSelectedTechnologies}
+              setPage={setPage}
             />
           </Grid>
           <Grid item xs={11} sm={10} md={8}>
@@ -63,19 +78,11 @@ const Projects: NextPage<ProjectsPage> = ({ projects, technologies }) => {
               justify="center"
               alignItems="stretch"
             >
-              {projects
-                .filter((project: ProjectType) => {
-                  if (
-                    selectedTechnologies == null ||
-                    selectedTechnologies.length === 0
-                  )
-                    return true;
-                  return selectedTechnologies.every((tech) => {
-                    return project.technologies
-                      .map((tech) => tech.title)
-                      .includes(tech.title);
-                  });
-                })
+              {viewProjects
+                .slice(
+                  (page - 1) * PAGE_PROJECT_COUNT,
+                  page * PAGE_PROJECT_COUNT
+                )
                 .map((project: ProjectType) => {
                   return (
                     <Grid key={project.title} item xs={12} sm={6} md={4} lg={4}>
@@ -84,6 +91,18 @@ const Projects: NextPage<ProjectsPage> = ({ projects, technologies }) => {
                   );
                 })}
             </Grid>
+          </Grid>
+          <Grid item xs={12}>
+            <Pagination
+              classes={{ ul: classes.ul }}
+              page={page}
+              onChange={(_, value) => {
+                setPage(value);
+                window.scrollTo(0, 0);
+              }}
+              count={Math.ceil(viewProjects.length / PAGE_PROJECT_COUNT)}
+              color="secondary"
+            />
           </Grid>
         </Grid>
       </div>
