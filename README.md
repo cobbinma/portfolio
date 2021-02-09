@@ -1,5 +1,7 @@
 # COBBING.DEV
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/27ab4fd5-420e-40e9-bd31-9fbb55d68ddf/deploy-status)](https://app.netlify.com/sites/cobbing-dev/deploys)
+
 [![avataaars.png](https://i.postimg.cc/rwmx0zSn/avataaars.png)](https://postimg.cc/6ykyFWbn)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
