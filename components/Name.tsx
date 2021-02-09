@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
       fontWeight: 800,
       textTransform: "uppercase",
       "-webkit-text-stroke-width": "1px",
-      "-webkit-text-stroke-color": theme.palette.primary.main,
+      "-webkit-text-stroke-color": theme.palette.secondary.main,
     },
   })
 );
