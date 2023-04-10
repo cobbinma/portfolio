@@ -31,7 +31,8 @@ params:
 
     defaultTheme: auto
     disableThemeToggle: false
-    ShowShareButtons: false
+    ShowShareButtons: true
+    ShareButtons: ["twitter", "linkedin", "facebook", "reddit"]
     ShowReadingTime: false
     displayFullLangName: true
     ShowBreadCrumbs: true
