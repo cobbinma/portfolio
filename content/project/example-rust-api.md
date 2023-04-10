@@ -5,7 +5,7 @@ description:  An example Rust REST API for a Pet Store. I took an official examp
 type: page
 topic: project
 link: "https://github.com/cobbinma/example-rust-api"
-image: "https://images.unsplash.com/photo-1561361398-841b52e4bfbf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80"
+image: "https://source.unsplash.com/lm0NmFbypcc/w=600"
 ---
 
 
