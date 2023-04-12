@@ -18,7 +18,7 @@ const pageTitle = "Projects";
         })
         .map((post) => (
           <Project
-            url={post.frontmatter.link}
+            url={post.url}
             image={post.frontmatter.image}
             title={post.frontmatter.title}
             description={post.frontmatter.description}
@@ -27,5 +27,3 @@ const pageTitle = "Projects";
     }
   </div>
 </BaseLayout>
-
-<style></style>
