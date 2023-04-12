@@ -1,9 +1,23 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  fontmatter: {
+    title: string;
+    description: string;
+    pubdate: string;
+    author: string;
+    image: {
+      url: string;
+      alt: string;
+    };
+  };
+}
+
 const { frontmatter } = Astro.props;
 ---
 
-<BaseLayout>
+<BaseLayout pageTitle={frontmatter.title}>
   <h1>{frontmatter.title}</h1>
   <p><em>{frontmatter.description}</em></p>
   <cite>{frontmatter.pubDate.slice(0, 10)}</cite>

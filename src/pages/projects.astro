@@ -1,7 +1,18 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Project from "../components/Project.astro";
-const allPosts = await Astro.glob("../pages/projects/*.md");
+
+interface Project {
+  link: string;
+  title: string;
+  description: string;
+  image: {
+    url: string;
+  };
+  pubDate: string;
+}
+
+const projects = await Astro.glob<Project>("../pages/projects/*.md");
 const pageTitle = "Projects";
 ---
 
@@ -9,7 +20,7 @@ const pageTitle = "Projects";
   <h1>{pageTitle}</h1>
   <div>
     {
-      allPosts
+      projects
         .sort(function (a, b) {
           return (
             new Date(b.frontmatter.pubDate).getTime() -
@@ -18,7 +29,7 @@ const pageTitle = "Projects";
         })
         .map((post) => (
           <Project
-            url={post.url}
+            url={post.frontmatter.link}
             image={post.frontmatter.image}
             title={post.frontmatter.title}
             description={post.frontmatter.description}
