@@ -6,9 +6,9 @@ const { url, title, image, description, pubDate } = Astro.props;
   <a class="secondary" href={url}>
     <article>
       <h5>{title}</h5>
-      <p class="description">{description}</p>
+      <small class="description">{description}</small>
       <img src={image.url} />
-      <p class="footer">{pubDate.slice(0, 10)}</p>
+      <small class="footer">{pubDate.slice(0, 10)}</small>
     </article>
   </a>
 </div>
@@ -32,14 +32,7 @@ const { url, title, image, description, pubDate } = Astro.props;
 
   a,
   u {
-    text-decoration: none;
-  }
-
-  .block {
-    display: block;
-  }
-
-  .tag {
-    margin: 5px;
+    color: inherit;
+    text-decoration: inherit;
   }
 </style>

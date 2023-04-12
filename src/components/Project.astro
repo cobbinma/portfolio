@@ -6,7 +6,7 @@ const { url, title, image, description } = Astro.props;
   <a class="secondary" href={url}>
     <article>
       <h5>{title}</h5>
-      <p class="description">{description}</p>
+      <small class="description">{description}</small>
       <img src={image.url} />
     </article>
   </a>
@@ -30,14 +30,7 @@ const { url, title, image, description } = Astro.props;
 
   a,
   u {
-    text-decoration: none;
-  }
-
-  .block {
-    display: block;
-  }
-
-  .tag {
-    margin: 5px;
+    color: inherit;
+    text-decoration: inherit;
   }
 </style>
