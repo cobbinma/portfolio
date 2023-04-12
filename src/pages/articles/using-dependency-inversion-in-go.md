@@ -1,19 +1,25 @@
 ---
+layout: ../../layouts/MarkdownPostLayout.astro
 title: Using Dependency Inversion in Go
-date: 2019-09-07T09:00:00.000Z
-type: page
-description: We use Kanye West to explore how to implement dependency inversion in the go programming language.
-topic: programming
-image: "https://images.unsplash.com/photo-1473396413399-6717ef7c4093?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&fm=jpg&w=700&fit=max"
+author: Matthew Cobbing
+description: "We use Kanye West to explore how to implement dependency inversion in the go programming language."
+image:
+  url: "https://images.unsplash.com/photo-1473396413399-6717ef7c4093?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&fm=jpg&w=700&fit=max"
+  alt: "Kanye"
+pubDate: 2019-09-07T09:00:00.000Z
+tags: ["go", "rust"]
 ---
 
 ## What is Dependency Inversion?
+
 Dependency Inversion is the idea that high-level logic should not depend on its low-level implementations. Business logic in our application should not care about whether we get data from an AWS bucket or Google Cloud Storage; we should be able to easily swap these implementations without our program breaking. This makes our code stable against change. We can also make our application testable by swapping these dependencies for implementations that are easier to test.
 
 ## How is this done in Go?
+
 In Go, interfaces enable us to use dependency inversion. We are able to use different implementations in our code, as long as they satisfy the interface we have defined. We use dependency injection to tell the application which implementation to use.
 
 ## Worked Example
+
 To demonstrate how this works in Go we’re going to build upon a Quote API that provides random quotes to our users. Below is a screenshot of our current Go handler that provides Kanye West quotes.
 
 ```go
@@ -74,6 +80,7 @@ Any struct that has a method called ‘Get’ that takes a string as an argument
 Now we need a way of injecting the dependency into the handler to make it agnostic to whatever implementation of the Client interface we choose to use. There are many approaches of dependency injection in Go. I will outline a few below:
 
 ### Higher Order Function
+
 We could create a higher-order function that returned our original handler function. This is convenient as you only need to call the higher order function with what you need to use, we also do not need to create a handler struct.
 
 ```go
@@ -99,6 +106,7 @@ func main() {
 ```
 
 ### Constructor
+
 We can create a ‘handlers’ struct, which has a constructor function where we supply the client implementation. The handlers struct has a field called client which is where our implementation is stored.
 
 ```go
@@ -139,6 +147,7 @@ func main() {
 ```
 
 ### Using Options
+
 Another approach is to use options in our handlers constructor. In this approach we set a default implementation to use unless the user gives an alternative as an option. The handlers constructor would be a variadic function, so that either options can be given to it or not. In the example below we export a higher order option function WithCustomClient, to make it easy for the user to use an alternative Client implementation.
 
 ```go
@@ -191,6 +200,7 @@ h := handlers.NewHandlers(handlers.WithCustomClient(&http.Client{
 Using this approach, when you want to use a default implementation, you do not need to construct those implementations yourself which can leave your main file less convoluted.
 
 ### Test Implementation
+
 Now we have covered the different dependency injection approaches, we will create an implementation of the Client interface to be used in test. From here we will use higher order functions to inject dependency.
 
 At this point we could either write a test double ourselves or use GoMock to generate an implementation that allows us to control its behaviour though stubbing. For this example, we will use GoMock.
@@ -316,6 +326,7 @@ var _ = Describe("Handlers", func() {
 The test case stubs the mock client implementation. We check it is called with the correct URL string and tell it to return our HTTP response without an error. We can check that the HTTP status code and the quote sent to the user are as we expect.
 
 ## Conclusion
+
 We have covered how to use dependency inversion to alter our handler so that it can be used with any implementation of Client. This technique can be applied to any type of dependency.
 
 Dependency Inversion can be a powerful tool to create programs that are more stable and robust as features are added to it. We can create tests that mock dependencies and by depending on a concept rather than an implementation, we reduce the amount of change to business logic.
