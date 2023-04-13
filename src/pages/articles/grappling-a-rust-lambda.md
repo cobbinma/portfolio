@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
+layout: ../../layouts/Article.astro
 title: Grappling a Rust Lambda 🦀
 author: Matthew Cobbing
 description: "How I (eventually) got a Rust Lambda to cross-compile using Cargo Lambda."

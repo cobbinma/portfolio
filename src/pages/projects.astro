@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Project from "../components/Project.astro";
+import Card from "../components/Card.astro";
 
 interface Project {
   link: string;
@@ -8,6 +8,7 @@ interface Project {
   description: string;
   image: {
     url: string;
+    alt: string;
   };
   pubDate: string;
 }
@@ -28,7 +29,7 @@ const pageTitle = "Projects";
           );
         })
         .map((post) => (
-          <Project
+          <Card
             url={post.frontmatter.link}
             image={post.frontmatter.image}
             title={post.frontmatter.title}

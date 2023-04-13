@@ -1,5 +1,5 @@
 ---
-layout: ../../layouts/MarkdownPostLayout.astro
+layout: ../../layouts/Article.astro
 title: Using Dependency Inversion in Go
 author: Matthew Cobbing
 description: "We use Kanye West to explore how to implement dependency inversion in the go programming language."
