@@ -12,8 +12,8 @@ interface Article {
   pubDate: string;
 }
 
-const articles = await Astro.glob<Article>("../pages/articles/*.md");
-const pageTitle = "Articles";
+const articles = await Astro.glob<Article>("../pages/posts/*.md");
+const pageTitle = "Blog";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
