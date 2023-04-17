@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Card from "../components/Card.astro";
+import List from "../components/List.astro";
 
 interface Article {
   title: string;
@@ -18,24 +18,5 @@ const pageTitle = "Articles";
 
 <BaseLayout pageTitle={pageTitle}>
   <h1>{pageTitle}</h1>
-  <div>
-    {
-      articles
-        .sort(function (a, b) {
-          return (
-            new Date(b.frontmatter.pubDate).getTime() -
-            new Date(a.frontmatter.pubDate).getTime()
-          );
-        })
-        .map((post) => (
-          <Card
-            url={post.url}
-            image={post.frontmatter.image}
-            title={post.frontmatter.title}
-            description={post.frontmatter.description}
-            pubDate={post.frontmatter.pubDate}
-          />
-        ))
-    }
-  </div>
+  <List items={articles} />
 </BaseLayout>
