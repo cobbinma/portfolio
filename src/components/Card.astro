@@ -1,12 +1,13 @@
 ---
 interface Props {
-  url: string | undefined;
+  url?: string;
   title: string;
   description: string;
   image: {
     url: string;
+    alt: string;
   };
-  pubDate: string;
+  pubDate?: string;
 }
 
 const { url, title, image, description, pubDate } = Astro.props;
@@ -17,8 +18,8 @@ const { url, title, image, description, pubDate } = Astro.props;
     <article>
       <h5>{title}</h5>
       <small class="description">{description}</small>
-      <img src={image.url} />
-      <small class="footer">{pubDate.slice(0, 10)}</small>
+      <img src={image.url} alt={image.alt} />
+      {pubDate && <small class="footer">{pubDate.slice(0, 10)}</small>}
     </article>
   </a>
 </div>
