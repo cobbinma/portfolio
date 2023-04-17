@@ -1,0 +1,45 @@
+---
+const { url, title, image, description, pubDate } = Astro.props;
+---
+
+<div>
+  <a class="secondary" href={url}>
+    <article>
+      <h5>{title}</h5>
+      <p class="description">{description}</p>
+      <img src={image.url} />
+      <p class="footer">{pubDate.slice(0, 10)}</p>
+    </article>
+  </a>
+</div>
+
+<style>
+  h5 {
+    margin-bottom: 0;
+  }
+
+  div {
+    max-width: 700px;
+  }
+
+  .description {
+    margin-bottom: 5;
+  }
+
+  .footer {
+    margin: 0;
+  }
+
+  a,
+  u {
+    text-decoration: none;
+  }
+
+  .block {
+    display: block;
+  }
+
+  .tag {
+    margin: 5px;
+  }
+</style>

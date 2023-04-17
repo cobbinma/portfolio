@@ -1,0 +1,34 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogPost from "../components/BlogPost.astro";
+const allPosts = await Astro.glob("../pages/articles/*.md");
+const pageTitle = "Articles";
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <h1>{pageTitle}</h1>
+  <div>
+    {
+      allPosts
+        .sort(function (a, b) {
+          return (
+            new Date(b.frontmatter.pubDate).getTime() -
+            new Date(a.frontmatter.pubDate).getTime()
+          );
+        })
+        .map((post) => (
+          <BlogPost
+            url={post.url}
+            image={post.frontmatter.image}
+            title={post.frontmatter.title}
+            description={post.frontmatter.description}
+            author={post.frontmatter.author}
+            pubDate={post.frontmatter.pubDate}
+            tags={post.frontmatter.tags}
+          />
+        ))
+    }
+  </div>
+</BaseLayout>
+
+<style></style>
