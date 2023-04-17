@@ -4,6 +4,7 @@ import Card from "./Card.astro";
 
 interface Props {
   items: MarkdownInstance<Item>[];
+  showDate?: boolean;
 }
 
 interface Item {
@@ -18,7 +19,7 @@ interface Item {
   draft?: boolean;
 }
 
-const { items } = Astro.props;
+const { items, showDate } = Astro.props;
 ---
 
 <div>
@@ -37,7 +38,7 @@ const { items } = Astro.props;
           image={post.frontmatter.image}
           title={post.frontmatter.title}
           description={post.frontmatter.description}
-          pubDate={post.frontmatter.pubDate}
+          pubDate={showDate ? post.frontmatter.pubDate : undefined}
         />
       ))
   }
