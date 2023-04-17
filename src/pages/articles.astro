@@ -1,7 +1,17 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import BlogPost from "../components/BlogPost.astro";
-const allPosts = await Astro.glob("../pages/articles/*.md");
+import Article from "../components/Article.astro";
+
+interface Article {
+  title: string;
+  description: string;
+  image: {
+    url: string;
+  };
+  pubDate: string;
+}
+
+const posts = await Astro.glob<Article>("../pages/articles/*.md");
 const pageTitle = "Articles";
 ---
 
@@ -9,7 +19,7 @@ const pageTitle = "Articles";
   <h1>{pageTitle}</h1>
   <div>
     {
-      allPosts
+      posts
         .sort(function (a, b) {
           return (
             new Date(b.frontmatter.pubDate).getTime() -
@@ -17,7 +27,7 @@ const pageTitle = "Articles";
           );
         })
         .map((post) => (
-          <BlogPost
+          <Article
             url={post.url}
             image={post.frontmatter.image}
             title={post.frontmatter.title}

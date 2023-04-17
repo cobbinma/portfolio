@@ -27,7 +27,7 @@ version `GLIBC_2.28` not found
 
 From that and some googling, I gauged that cross compiling the lambdas was no longer working correctly, so I decided to update cargo-lambda to 0.18.1.
 
-We use the x86_64 architecture for lambdas so we need the x86_64-unknown-linux-gnu target.
+Our lambdas have the x86_64 architecture so we need the x86_64-unknown-linux-gnu target.
 
 We use a custom build image to build rust lambdas that does not include zig, and as this version of cargo-lambda uses zig, the pipeline failed when trying to build the lambdas.
 
@@ -42,7 +42,7 @@ Error:
   × install Zig and run cargo-lambda again
 ```
 
-We use Alpine in our custom build image, which doesn't provide any convenient ways to install zig, so I decided to try and use cargo as the compiler as stated on the cargo-lambda website.
+In gitlab-ci we use a custom Alpine Linux build image, which doesn't provide any convenient ways to install zig, so I decided to try and use cargo as the compiler as stated on the cargo-lambda website.
 
 ```sh
 cargo lambda build --compiler cargo
@@ -75,7 +75,7 @@ sudo mv zig-linux-x86_64-0.10.1/* /usr/local/bin
 
 That actually solved the issue. The build worked and the lambda was deployed correctly 🎉.
 
-It doesn't seem too bad now that I've written it all down, but this caused me a massive headache at the time.
+Reading this it doesn't seem too bad, but this caused me such a headache at the time I felt it warranted me posting about it.
 
 ## Solution
 

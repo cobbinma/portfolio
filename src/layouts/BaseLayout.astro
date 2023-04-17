@@ -1,6 +1,11 @@
 ---
 import Header from "../components/Header.astro";
 import "../styles/pico.min.css";
+
+interface Props {
+  pageTitle: string;
+}
+
 const { pageTitle } = Astro.props;
 ---
 
