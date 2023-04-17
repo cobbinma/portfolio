@@ -1,6 +1,6 @@
 ---
 title: protoc-gen-camel 🐪
-dateMonthYear: April 2023
+date: 2023-04-03T09:00:00.000Z
 description:  A plug-in for Google's Protocol Buffers compiler to check camel case field name violations.
 type: page
 topic: project
