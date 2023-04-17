@@ -12,7 +12,7 @@ interface Article {
   pubDate: string;
 }
 
-const articles = await Astro.glob<Article>("../pages/posts/*.md");
+const articles = await Astro.glob<Article>("../pages/blog/*.md");
 const pageTitle = "Blog";
 ---
 
