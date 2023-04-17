@@ -10,6 +10,7 @@ interface Article {
     alt: string;
   };
   pubDate: string;
+  draft?: boolean;
 }
 
 const articles = await Astro.glob<Article>("../pages/blog/*.md");

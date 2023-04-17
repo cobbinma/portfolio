@@ -15,6 +15,7 @@ interface Item {
     alt: string;
   };
   pubDate: string;
+  draft?: boolean;
 }
 
 const { items } = Astro.props;
@@ -23,6 +24,7 @@ const { items } = Astro.props;
 <div>
   {
     items
+      .filter((post) => !post.frontmatter.draft)
       .sort(function (a, b) {
         return (
           new Date(b.frontmatter.pubDate).getTime() -
