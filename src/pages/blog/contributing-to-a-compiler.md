@@ -40,7 +40,6 @@ The issue had 'good first issue' and 'help wanted' tags, so I looked into it, no
 I started by adding a failing test by copying an already existing test and adding the code from the issue.
 
 ```rust
-
 // https://github.com/gleam-lang/gleam/issues/1519
 #[test]
 fn permit_holes_in_fn_args_and_returns() {
@@ -55,12 +54,16 @@ fn permit_holes_in_fn_args_and_returns() {
 
 By doing that, I could narrow down the issue somewhat. To be honest I didn't really understand what the section of code was doing exactly, so started to see what methods I could call on the variables and, after some aimless digging, I found a 'permit_holes' method on a hydrator variable...
 
+```rust
+hydrator.permit_holes(true);
+```
+
 ![](https://media.giphy.com/media/3oEduNITi4GfwxY1Fu/giphy.gif)
 
-All the tests passed after adding that line of code, and without fully knowing how and with a lot of skepticism... had I just fixed the issue?
+All the tests passed after adding that line of code. Without fully knowing how and still with a lot of skepticism... had I just fixed the issue?
 
 I created a pull request with the changes. The creator of the language quickly replied, and to my surprise, he said the changes were clean and asked me to add a line to the changelog. After doing that, the pull request was approved and I merged!
 
-Since my first commit, I have continued to contribute to the repository. I have mostly made simple changes to the formatter. Going forward, I would like to start making more significant changes to the code base. The language's community seems extremely friendly and supportive. I'm excited to see where the language goes from here.
+Since my first commit, I have continued to contribute to the repository. Mostly making simple changes to the formatter. Going forward, I would like to start making more significant contributions to the code base. The language's community seems extremely friendly and supportive. I'm excited to see where the language goes from here.
 
 I also want to continue learning about compilers, it's an area of Software Engineering that I find really rewarding and enjoy working in.
