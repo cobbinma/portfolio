@@ -5,7 +5,7 @@ description:  An example Go REST API for a Pet Store. I took an official example
 type: page
 topic: project
 link: "https://github.com/cobbinma/example-go-api"
-image: "https://source.unsplash.com/Om-Z4TDfv7o/w=600"
+image: "https://images.unsplash.com/photo-1626119212388-0f477087bec4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&fm=jpg&w=700&fit=max"
 ---
 
 

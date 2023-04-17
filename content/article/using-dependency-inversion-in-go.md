@@ -4,7 +4,7 @@ date: 2019-09-07T09:00:00.000Z
 type: page
 description: We use Kanye West to explore how to implement dependency inversion in the go programming language.
 topic: programming
-image: "https://source.unsplash.com/6CTgu2lP_c0/w=600"
+image: "https://images.unsplash.com/photo-1473396413399-6717ef7c4093?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&fm=jpg&w=700&fit=max"
 ---
 
 ## What is Dependency Inversion?
