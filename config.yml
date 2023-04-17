@@ -47,7 +47,7 @@ params:
         description: |
 
           Techincal Lead at Perkbox
-        imageUrl: "/images/profile.png"
+        imageUrl: "/images/profile.jpeg"
         imageTitle: my image
         imageWidth: 240
         imageHeight: 240
