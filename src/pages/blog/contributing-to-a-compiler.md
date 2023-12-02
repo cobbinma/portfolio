@@ -7,7 +7,7 @@ image:
   url: "https://images.unsplash.com/photo-1496247749665-49cf5b1022e9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&fm=jpg&w=700&fit=max"
   alt: "Heavy industry"
 pubDate: 2023-04-14T09:00:00.000Z
-draft: true
+draft: false
 ---
 
 ##
