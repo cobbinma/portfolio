@@ -25,7 +25,6 @@ const { items, showDate } = Astro.props;
 <div>
   {
     items
-      .filter((post) => import.meta.env.DRAFT)
       .sort(function (a, b) {
         return (
           new Date(b.frontmatter.pubDate).getTime() -
