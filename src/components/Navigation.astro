@@ -3,14 +3,13 @@ const currentPath = Astro.url.pathname;
 ---
 
 <nav>
-  <ul>
-    <li><strong>cobbing.dev</strong></li>
-  </ul>
-  <ul>
-    <li><strong><a href="/" class={currentPath === '/' ? 'active' : ''}>Home</a></strong></li>
-    <li><strong><a href="/blog/" class={currentPath.startsWith('/blog') ? 'active' : ''}>Blog</a></strong></li>
-    <li><strong><a href="/projects/" class={currentPath.startsWith('/projects') ? 'active' : ''}>Projects</a></strong></li>
-  </ul>
+  <div class="nav-container">
+    <div class="nav-links">
+      <a href="/" class={currentPath === '/' ? 'active' : ''}>Home</a>
+      <a href="/blog/" class={currentPath.startsWith('/blog') ? 'active' : ''}>Blog</a>
+      <a href="/projects/" class={currentPath.startsWith('/projects') ? 'active' : ''}>Projects</a>
+    </div>
+  </div>
 </nav>
 
 <style>
@@ -18,38 +17,92 @@ const currentPath = Astro.url.pathname;
     position: sticky;
     top: 0;
     z-index: 100;
-    backdrop-filter: blur(10px);
-    background: rgba(17, 24, 39, 0.8);
-    transition: all 0.3s var(--transition-smooth);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    margin-bottom: 2rem;
+    backdrop-filter: blur(16px);
+    background: rgba(0, 0, 0, 0.6);
+    border-bottom: 1px solid rgba(0, 212, 255, 0.15);
   }
 
-  /* Active page indicator */
-  nav a.active {
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Clean navigation links */
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.65);
     position: relative;
-    color: var(--accent-cyan);
+    transition: color 0.3s ease;
+    letter-spacing: 0.02em;
   }
 
-  nav a.active::after {
+  .nav-links a::after {
     content: '';
     position: absolute;
-    bottom: -4px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
-    box-shadow: var(--glow-shadow);
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 100%;
+    height: 1px;
+    background: var(--accent-cyan);
+    transition: transform 0.3s ease;
   }
 
-  /* Hover effect */
-  nav a:hover {
+  .nav-links a:hover {
+    color: #fff;
+  }
+
+  .nav-links a:hover::after {
+    transform: translateX(-50%) scaleX(1);
+  }
+
+  /* Active state */
+  .nav-links a.active {
     color: var(--accent-cyan);
-    transition: color 0.2s ease;
   }
 
-  nav a {
-    text-decoration: none;
-    transition: color 0.2s ease;
+  .nav-links a.active::after {
+    transform: translateX(-50%) scaleX(1);
+    background: var(--accent-cyan);
+    height: 2px;
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .nav-container {
+      padding: 0.875rem 1.5rem;
+    }
+
+    .nav-links {
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .nav-container {
+      padding: 0.75rem 1rem;
+    }
+
+    .nav-links {
+      gap: 1.25rem;
+    }
   }
 </style>
