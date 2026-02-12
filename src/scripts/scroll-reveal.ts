@@ -17,8 +17,7 @@ export function initScrollReveal() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        // Unobserve after revealing for performance
-        observer.unobserve(entry.target);
+        // Don't unobserve to support back/forward navigation
       }
     });
   }, observerOptions);
@@ -34,6 +33,8 @@ export function initScrollReveal() {
 
   animationClasses.forEach(className => {
     document.querySelectorAll(className).forEach(el => {
+      // Reset visibility for fresh start
+      el.classList.remove('visible');
       observer.observe(el);
     });
   });

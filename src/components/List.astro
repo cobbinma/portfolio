@@ -35,7 +35,14 @@ const { items, showDate } = Astro.props;
 
 <script>
   import { initScrollReveal } from '../scripts/scroll-reveal';
+  
+  // Initialize on first load
   initScrollReveal();
+  
+  // Re-initialize after View Transitions navigation
+  document.addEventListener('astro:page-load', () => {
+    initScrollReveal();
+  });
 </script>
 
 <style>
