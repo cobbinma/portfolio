@@ -1,5 +1,5 @@
 ---
-type Props = Record<string, never>;
+const currentPath = Astro.url.pathname;
 ---
 
 <nav>
@@ -7,8 +7,49 @@ type Props = Record<string, never>;
     <li><strong>cobbing.dev</strong></li>
   </ul>
   <ul>
-    <li><strong><a href="/">Home</a></strong></li>
-    <li><strong><a href="/blog/">Blog</a></strong></li>
-    <li><strong><a href="/projects/">Projects</a></strong></li>
+    <li><strong><a href="/" class={currentPath === '/' ? 'active' : ''}>Home</a></strong></li>
+    <li><strong><a href="/blog/" class={currentPath.startsWith('/blog') ? 'active' : ''}>Blog</a></strong></li>
+    <li><strong><a href="/projects/" class={currentPath.startsWith('/projects') ? 'active' : ''}>Projects</a></strong></li>
   </ul>
 </nav>
+
+<style>
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    background: rgba(17, 24, 39, 0.8);
+    transition: all 0.3s var(--transition-smooth);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 2rem;
+  }
+
+  /* Active page indicator */
+  nav a.active {
+    position: relative;
+    color: var(--accent-cyan);
+  }
+
+  nav a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
+    box-shadow: var(--glow-shadow);
+  }
+
+  /* Hover effect */
+  nav a:hover {
+    color: var(--accent-cyan);
+    transition: color 0.2s ease;
+  }
+
+  nav a {
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+</style>

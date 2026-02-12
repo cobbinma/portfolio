@@ -2,44 +2,210 @@
 import { Image } from 'astro:assets';
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Socials from "../components/Socials.astro";
-const pageTitle = "Home Page";
+const pageTitle = "Matthew Cobbing - Technical Lead";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <div class="container">
-    <Image 
-      class="profile" 
-      src="/profile.jpeg" 
-      alt="Matthew Cobbing" 
-      width={250} 
-      height={250}
-      loading="eager"
-    />
-    <h2>Matthew Cobbing</h2>
-    <p>Technical Lead at Perkbox</p>
+  <div class="hero-container">
+    <!-- Terminal-style typewriter greeting -->
+    <div class="terminal-greeting">
+      <span class="prompt">&gt;</span> 
+      <span id="typewriter"></span>
+      <span class="cursor">_</span>
+    </div>
+    
+    <!-- Profile image with animated glow -->
+    <div class="profile-wrapper">
+      <Image 
+        class="profile" 
+        src="/profile.jpeg" 
+        alt="Matthew Cobbing" 
+        width={250} 
+        height={250}
+        loading="eager"
+      />
+    </div>
+    
+    <!-- Name and title -->
+    <h1>Matthew Cobbing</h1>
+    <p class="subtitle">Technical Lead at Perkbox</p>
+    
+    <!-- Tech stack badges -->
+    <div class="tech-stack">
+      <span class="tech-badge">Go</span>
+      <span class="tech-badge">Rust 🦀</span>
+      <span class="tech-badge">TypeScript</span>
+      <span class="tech-badge">GraphQL</span>
+      <span class="tech-badge">Kubernetes</span>
+      <span class="tech-badge">AWS</span>
+      <span class="tech-badge">Docker</span>
+      <span class="tech-badge">gRPC</span>
+    </div>
+    
+    <!-- Social links -->
     <Socials />
   </div>
+
+  <script>
+    import { initTypewriter } from '../scripts/typewriter';
+    
+    initTypewriter('typewriter', [
+      'Hello, I\'m Matthew Cobbing',
+      'Technical Lead at Perkbox',
+      'Building reliable systems with Go & Rust',
+      'Open source contributor to Gleam',
+      '7+ years of engineering experience',
+    ]);
+  </script>
 </BaseLayout>
 
 <style>
-  .profile {
-    border-radius: 50%;
-    margin-top: 100px;
-  }
-
-  .container {
+  .hero-container {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    min-height: 70vh;
+    padding: 2rem 0;
   }
 
-  p {
-    margin: 0;
+  /* Terminal-style greeting */
+  .terminal-greeting {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.2rem;
+    color: var(--accent-green);
+    margin-bottom: 2rem;
+    text-align: center;
+    min-height: 1.5em;
   }
 
-  h2 {
-    padding-top: 20px;
-    margin: 0;
+  .prompt {
+    color: var(--accent-cyan);
+    font-weight: bold;
+    margin-right: 0.5rem;
+  }
+
+  /* Profile image with animated glow */
+  .profile-wrapper {
+    position: relative;
+    display: inline-block;
+    margin: 2rem 0;
+    padding: 4px;
+  }
+
+  .profile-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--accent-cyan), var(--accent-green), var(--accent-cyan));
+    background-size: 200% 200%;
+    z-index: 0;
+    animation: rotate-gradient 3s linear infinite;
+  }
+
+  @keyframes rotate-gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .profile {
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+    display: block;
+    transition: transform 0.3s var(--transition-smooth);
+    background: #000;
+  }
+
+  .profile:hover {
+    transform: scale(1.05);
+  }
+
+  /* Name and title */
+  h1 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+
+  .subtitle {
+    margin: 0 0 2rem 0;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+  }
+
+  /* Tech stack badges */
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin: 1.5rem 0 2rem 0;
+    max-width: 600px;
+  }
+
+  .tech-badge {
+    padding: 0.4rem 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.3s var(--transition-smooth);
+    opacity: 0;
+    animation: fadeInUp 0.6s forwards;
+  }
+
+  .tech-badge:nth-child(1) { animation-delay: 0.1s; }
+  .tech-badge:nth-child(2) { animation-delay: 0.2s; }
+  .tech-badge:nth-child(3) { animation-delay: 0.3s; }
+  .tech-badge:nth-child(4) { animation-delay: 0.4s; }
+  .tech-badge:nth-child(5) { animation-delay: 0.5s; }
+  .tech-badge:nth-child(6) { animation-delay: 0.6s; }
+  .tech-badge:nth-child(7) { animation-delay: 0.7s; }
+  .tech-badge:nth-child(8) { animation-delay: 0.8s; }
+
+  .tech-badge:hover {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: var(--accent-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .terminal-greeting {
+      font-size: 1rem;
+    }
+
+    .tech-stack {
+      max-width: 100%;
+      padding: 0 1rem;
+    }
+
+    .tech-badge {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.6rem;
+    }
   }
 </style>

@@ -10,7 +10,7 @@ interface Props {
 const { items, showDate } = Astro.props;
 ---
 
-<div>
+<div class="card-grid">
   {
     items
       .sort(function (a, b) {
@@ -20,13 +20,29 @@ const { items, showDate } = Astro.props;
         );
       })
       .map((item) => (
-        <Card
-          url={'link' in item.data ? item.data.link : `/blog/${item.id.replace('.md', '')}`}
-          image={item.data.image}
-          title={item.data.title}
-          description={item.data.description}
-          pubDate={showDate ? item.data.pubDate.toISOString() : undefined}
-        />
+        <div class="fade-in-up">
+          <Card
+            url={'link' in item.data ? item.data.link : `/blog/${item.id.replace('.md', '')}`}
+            image={item.data.image}
+            title={item.data.title}
+            description={item.data.description}
+            pubDate={showDate ? item.data.pubDate.toISOString() : undefined}
+          />
+        </div>
       ))
   }
 </div>
+
+<script>
+  import { initScrollReveal } from '../scripts/scroll-reveal';
+  initScrollReveal();
+</script>
+
+<style>
+  .card-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+</style>

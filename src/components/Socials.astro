@@ -2,16 +2,8 @@
 type Props = Record<string, never>;
 ---
 
-<style>
-  footer {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-</style>
-
 <footer>
-  <a href="mailto:matthew@cobbing.dev">
+  <a href="mailto:matthew@cobbing.dev" aria-label="Email">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 21"
@@ -29,7 +21,7 @@ type Props = Record<string, never>;
       <polyline points="22,6 12,13 2,6"></polyline>
     </svg>
   </a>
-  <a href="https://github.com/cobbinma">
+  <a href="https://github.com/cobbinma" aria-label="GitHub" target="_blank" rel="noopener">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -47,7 +39,7 @@ type Props = Record<string, never>;
       </path>
     </svg>
   </a>
-  <a href="https://www.linkedin.com/in/cobbing/">
+  <a href="https://www.linkedin.com/in/cobbing/" aria-label="LinkedIn" target="_blank" rel="noopener">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -66,7 +58,7 @@ type Props = Record<string, never>;
       <circle cx="4" cy="4" r="2"></circle>
     </svg>
   </a>
-  <a href="https://medium.com/@cobbinma">
+  <a href="https://medium.com/@cobbinma" aria-label="Medium" target="_blank" rel="noopener">
     <svg
       version="1.0"
       xmlns="http://www.w3.org/2000/svg"
@@ -85,3 +77,38 @@ type Props = Record<string, never>;
     </svg>
   </a>
 </footer>
+
+<style>
+  footer {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: center;
+  }
+
+  footer a {
+    transition: all 0.3s var(--transition-smooth);
+    position: relative;
+    display: inline-flex;
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+  }
+
+  footer a:hover {
+    transform: translateY(-4px);
+    background: rgba(0, 212, 255, 0.1);
+    border-color: rgba(0, 212, 255, 0.3);
+  }
+
+  footer a svg {
+    filter: drop-shadow(0 0 0px transparent);
+    transition: all 0.3s ease;
+  }
+
+  footer a:hover svg {
+    filter: drop-shadow(0 0 8px var(--accent-cyan));
+    stroke: var(--accent-cyan);
+    fill: var(--accent-cyan);
+  }
+</style>

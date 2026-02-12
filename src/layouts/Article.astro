@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import ReadingProgress from "../components/ReadingProgress.astro";
 
 interface Props {
   frontmatter: {
@@ -17,6 +18,7 @@ interface Props {
 const { frontmatter } = Astro.props;
 ---
 
+<ReadingProgress />
 <BaseLayout pageTitle={frontmatter.title}>
   <h1>{frontmatter.title}</h1>
   <p><em>{frontmatter.description}</em></p>

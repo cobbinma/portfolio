@@ -1,0 +1,110 @@
+/* Reusable animation classes */
+
+/* Base state - hidden */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s var(--transition-smooth), 
+              transform 0.6s var(--transition-smooth);
+}
+
+/* Visible state - revealed */
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger animation for lists */
+.fade-in-up:nth-child(1) { transition-delay: 0.05s; }
+.fade-in-up:nth-child(2) { transition-delay: 0.1s; }
+.fade-in-up:nth-child(3) { transition-delay: 0.15s; }
+.fade-in-up:nth-child(4) { transition-delay: 0.2s; }
+.fade-in-up:nth-child(5) { transition-delay: 0.25s; }
+.fade-in-up:nth-child(6) { transition-delay: 0.3s; }
+.fade-in-up:nth-child(7) { transition-delay: 0.35s; }
+.fade-in-up:nth-child(8) { transition-delay: 0.4s; }
+.fade-in-up:nth-child(9) { transition-delay: 0.45s; }
+.fade-in-up:nth-child(10) { transition-delay: 0.5s; }
+
+/* Fade in animation (no movement) */
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+}
+
+/* Slide from left */
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.6s var(--transition-smooth),
+              transform 0.6s var(--transition-smooth);
+}
+
+.slide-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Slide from right */
+.slide-in-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.6s var(--transition-smooth),
+              transform 0.6s var(--transition-smooth);
+}
+
+.slide-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Scale up animation */
+.scale-in {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.5s var(--transition-smooth),
+              transform 0.5s var(--transition-smooth);
+}
+
+.scale-in.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Blinking cursor animation */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.cursor {
+  animation: blink 1s infinite;
+}
+
+/* Rotating border animation */
+@keyframes rotate-border {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+/* Rainbow animation (for easter egg) */
+@keyframes rainbow {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}

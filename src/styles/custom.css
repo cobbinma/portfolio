@@ -1,0 +1,67 @@
+/* Custom enhancements on top of Pico CSS */
+
+:root {
+  /* Accent colors - neon highlights */
+  --accent-cyan: #00d4ff;
+  --accent-green: #00ff9f;
+  --accent-glow: rgba(0, 212, 255, 0.3);
+  
+  /* Enhanced shadows for depth */
+  --glow-shadow: 0 0 20px var(--accent-glow);
+  --card-shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.4);
+  
+  /* Timing functions */
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Monospace for headings (code aesthetic) */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+/* Enhanced body readability */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background: var(--accent-cyan);
+  color: #000;
+}
+
+/* Links with accent color */
+a {
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-cyan);
+}
+
+/* Focus states for accessibility */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
