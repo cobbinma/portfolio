@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Socials from "../components/Socials.astro";
 const pageTitle = "Home Page";
@@ -6,7 +7,14 @@ const pageTitle = "Home Page";
 
 <BaseLayout pageTitle={pageTitle}>
   <div class="container">
-    <img class="profile" src="profile.jpeg" width="250" />
+    <Image 
+      class="profile" 
+      src="/profile.jpeg" 
+      alt="Matthew Cobbing" 
+      width={250} 
+      height={250}
+      loading="eager"
+    />
     <h2>Matthew Cobbing</h2>
     <p>Technical Lead at Perkbox</p>
     <Socials />

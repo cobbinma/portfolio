@@ -1,19 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import List from "../components/List.astro";
+import { getCollection } from 'astro:content';
 
-interface Project {
-  link: string;
-  title: string;
-  description: string;
-  image: {
-    url: string;
-    alt: string;
-  };
-  pubDate: string;
-}
-
-const projects = await Astro.glob<Project>("../pages/projects/*.md");
+const projects = await getCollection('projects');
 const pageTitle = "Projects";
 ---
 

@@ -1,22 +1,10 @@
 ---
-import type { MarkdownInstance } from "astro";
+import type { CollectionEntry } from 'astro:content';
 import Card from "./Card.astro";
 
 interface Props {
-  items: MarkdownInstance<Item>[];
+  items: CollectionEntry<'blog'>[] | CollectionEntry<'projects'>[];
   showDate?: boolean;
-}
-
-interface Item {
-  link?: string;
-  title: string;
-  description: string;
-  image: {
-    url: string;
-    alt: string;
-  };
-  pubDate: string;
-  draft?: boolean;
 }
 
 const { items, showDate } = Astro.props;
@@ -27,17 +15,17 @@ const { items, showDate } = Astro.props;
     items
       .sort(function (a, b) {
         return (
-          new Date(b.frontmatter.pubDate).getTime() -
-          new Date(a.frontmatter.pubDate).getTime()
+          new Date(b.data.pubDate).getTime() -
+          new Date(a.data.pubDate).getTime()
         );
       })
-      .map((post) => (
+      .map((item) => (
         <Card
-          url={post.frontmatter.link ? post.frontmatter.link : post.url}
-          image={post.frontmatter.image}
-          title={post.frontmatter.title}
-          description={post.frontmatter.description}
-          pubDate={showDate ? post.frontmatter.pubDate : undefined}
+          url={'link' in item.data ? item.data.link : `/blog/${item.id.replace('.md', '')}`}
+          image={item.data.image}
+          title={item.data.title}
+          description={item.data.description}
+          pubDate={showDate ? item.data.pubDate.toISOString() : undefined}
         />
       ))
   }

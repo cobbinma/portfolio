@@ -11,10 +11,11 @@
     "cypress:open": "cypress open"
   },
   "dependencies": {
-    "astro": "^2.2.1"
+    "astro": "^5.17.2"
   },
   "devDependencies": {
-    "cypress": "^12.9.0",
-    "prettier-plugin-astro": "^0.8.0"
+    "@types/bun": "latest",
+    "cypress": "^15.10.0",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

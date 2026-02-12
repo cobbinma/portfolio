@@ -2,10 +2,10 @@
 import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
-  fontmatter: {
+  frontmatter: {
     title: string;
     description: string;
-    pubdate: string;
+    pubDate: Date;
     author: string;
     image: {
       url: string;
@@ -20,7 +20,7 @@ const { frontmatter } = Astro.props;
 <BaseLayout pageTitle={frontmatter.title}>
   <h1>{frontmatter.title}</h1>
   <p><em>{frontmatter.description}</em></p>
-  <cite>{frontmatter.pubDate.slice(0, 10)}</cite>
+  <cite>{frontmatter.pubDate.toISOString().slice(0, 10)}</cite>
   <p>{frontmatter.author}</p>
   <img src={frontmatter.image.url} width="650" alt={frontmatter.image.alt} />
 
