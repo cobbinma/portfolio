@@ -2,7 +2,37 @@
 import { Image } from 'astro:assets';
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Socials from "../components/Socials.astro";
+import { getCollection } from 'astro:content';
+
 const pageTitle = "Matthew Cobbing - Technical Lead";
+
+// Fetch all projects to determine which technologies have projects
+const projects = await getCollection('projects');
+const projectTechnologies = new Set(
+  projects.flatMap(p => {
+    if ('technologies' in p.data && Array.isArray(p.data.technologies)) {
+      return (p.data.technologies as string[]).map((t: string) => t.toLowerCase());
+    }
+    return [];
+  })
+);
+
+// Homepage technology display (preserves order and display text like emojis)
+const homepageTechs = [
+  { display: "Go", tech: "Go" },
+  { display: "Rust 🦀", tech: "Rust" },
+  { display: "TypeScript", tech: "TypeScript" },
+  { display: "GraphQL", tech: "GraphQL" },
+  { display: "Kubernetes", tech: "Kubernetes" },
+  { display: "AWS", tech: "AWS" },
+  { display: "Docker", tech: "Docker" },
+  { display: "Protobuf", tech: "Protobuf" },
+  { display: "Microservices", tech: "Microservices" },
+  { display: "CI/CD", tech: "CI/CD" },
+  { display: "PostgreSQL", tech: "PostgreSQL" },
+  { display: "Terraform", tech: "Terraform" },
+  { display: "Frontend", tech: "Frontend" },
+];
 ---
 
 <BaseLayout pageTitle={pageTitle}>
@@ -31,18 +61,26 @@ const pageTitle = "Matthew Cobbing - Technical Lead";
     
     <!-- Tech stack badges -->
     <div class="tech-stack">
-      <span class="tech-badge">Go</span>
-      <span class="tech-badge">Rust 🦀</span>
-      <span class="tech-badge">TypeScript</span>
-      <span class="tech-badge">GraphQL</span>
-      <span class="tech-badge">Kubernetes</span>
-      <span class="tech-badge">AWS</span>
-      <span class="tech-badge">Docker</span>
-      <span class="tech-badge">gRPC</span>
-      <span class="tech-badge">Microservices</span>
-      <span class="tech-badge">CI/CD</span>
-      <span class="tech-badge">PostgreSQL</span>
-      <span class="tech-badge">Terraform</span>
+      {homepageTechs.map((item, index) => {
+        const hasProjects = projectTechnologies.has(item.tech.toLowerCase());
+        
+        return hasProjects ? (
+          <a 
+            href={`/projects/${item.tech.toLowerCase()}`}
+            class="tech-badge tech-badge-clickable"
+            style={`animation-delay: ${0.1 * (index + 1)}s`}
+          >
+            {item.display}
+          </a>
+        ) : (
+          <span 
+            class="tech-badge tech-badge-muted"
+            style={`animation-delay: ${0.1 * (index + 1)}s`}
+          >
+            {item.display}
+          </span>
+        );
+      })}
     </div>
     
     <!-- Social links -->
@@ -158,26 +196,35 @@ const pageTitle = "Matthew Cobbing - Technical Lead";
     transition: all 0.3s var(--transition-smooth);
     opacity: 0;
     animation: fadeInUp 0.6s forwards;
+    display: inline-block;
   }
 
-  .tech-badge:nth-child(1) { animation-delay: 0.1s; }
-  .tech-badge:nth-child(2) { animation-delay: 0.2s; }
-  .tech-badge:nth-child(3) { animation-delay: 0.3s; }
-  .tech-badge:nth-child(4) { animation-delay: 0.4s; }
-  .tech-badge:nth-child(5) { animation-delay: 0.5s; }
-  .tech-badge:nth-child(6) { animation-delay: 0.6s; }
-  .tech-badge:nth-child(7) { animation-delay: 0.7s; }
-  .tech-badge:nth-child(8) { animation-delay: 0.8s; }
-  .tech-badge:nth-child(9) { animation-delay: 0.9s; }
-  .tech-badge:nth-child(10) { animation-delay: 1.0s; }
-  .tech-badge:nth-child(11) { animation-delay: 1.1s; }
-  .tech-badge:nth-child(12) { animation-delay: 1.2s; }
+  /* Clickable tags (with projects) */
+  .tech-badge-clickable {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
 
-  .tech-badge:hover {
+  .tech-badge-clickable:hover {
     background: rgba(0, 212, 255, 0.1);
     border-color: var(--accent-cyan);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
+  }
+
+  /* Non-clickable tags (no projects) - muted appearance */
+  .tech-badge-muted {
+    opacity: 0.6;
+    cursor: default;
+  }
+
+  /* No hover effect for muted badges */
+  .tech-badge-muted:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transform: none;
+    box-shadow: none;
   }
 
   @keyframes fadeInUp {

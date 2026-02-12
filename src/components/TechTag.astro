@@ -1,0 +1,50 @@
+---
+interface Props {
+  technology: string;
+  active?: boolean;
+}
+
+const { technology, active = false } = Astro.props;
+const urlTech = technology.toLowerCase();
+---
+
+<a href={`/projects/${urlTech}`} class:list={["tech-tag", { active }]}>
+  {technology}
+</a>
+
+<style>
+  .tech-tag {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    transition: all 0.3s var(--transition-smooth);
+    white-space: nowrap;
+  }
+
+  .tech-tag:hover {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: var(--accent-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
+    color: var(--accent-cyan);
+  }
+
+  .tech-tag.active {
+    background: rgba(0, 212, 255, 0.15);
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+  }
+
+  @media (max-width: 768px) {
+    .tech-tag {
+      font-size: 0.7rem;
+      padding: 0.3rem 0.6rem;
+    }
+  }
+</style>

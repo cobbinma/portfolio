@@ -8,4 +8,5 @@ link: "https://github.com/cobbinma/protoc-gen-camel"
 image:
   url: "https://images.unsplash.com/photo-1495833066942-79abe24b0c1f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&fm=jpg&w=700&fit=max"
   alt: "camel"
+technologies: ["Go", "Protobuf"]
 ---

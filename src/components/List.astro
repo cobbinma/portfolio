@@ -27,6 +27,7 @@ const { items, showDate } = Astro.props;
             title={item.data.title}
             description={item.data.description}
             pubDate={showDate ? item.data.pubDate.toISOString() : undefined}
+            technologies={'technologies' in item.data && Array.isArray(item.data.technologies) ? item.data.technologies as string[] : undefined}
           />
         </div>
       ))

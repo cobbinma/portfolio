@@ -8,4 +8,5 @@ link: "https://github.com/cobbinma/example-go-api"
 image:
   url: "https://images.unsplash.com/photo-1626119212388-0f477087bec4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&fm=jpg&w=700&fit=max"
   alt: "Gopher"
+technologies: ["Go", "PostgreSQL", "Microservices"]
 ---

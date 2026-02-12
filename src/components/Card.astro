@@ -1,4 +1,6 @@
 ---
+import TechTag from "./TechTag.astro";
+
 interface Props {
   url?: string;
   title: string;
@@ -8,9 +10,10 @@ interface Props {
     alt: string;
   };
   pubDate?: string;
+  technologies?: string[];
 }
 
-const { url, title, image, description, pubDate } = Astro.props;
+const { url, title, image, description, pubDate, technologies } = Astro.props;
 ---
 
 <div class="card-wrapper">
@@ -22,6 +25,13 @@ const { url, title, image, description, pubDate } = Astro.props;
       <div class="content">
         <h5>{title}</h5>
         <small class="description">{description}</small>
+        {technologies && technologies.length > 0 && (
+          <div class="tech-tags">
+            {technologies.map(tech => (
+              <TechTag technology={tech} />
+            ))}
+          </div>
+        )}
         {pubDate && <small class="footer">{pubDate.slice(0, 10)}</small>}
       </div>
     </article>
@@ -130,6 +140,14 @@ const { url, title, image, description, pubDate } = Astro.props;
     color: var(--accent-cyan);
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem;
+  }
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: auto;
+    padding-top: 0.75rem;
   }
 
   a {

@@ -27,6 +27,7 @@ const projects = defineCollection({
       alt: z.string(),
     }),
     pubDate: z.coerce.date(),
+    technologies: z.array(z.string()),
   }),
 });
 

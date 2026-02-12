@@ -1,13 +1,128 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import List from "../components/List.astro";
+import TechTag from "../components/TechTag.astro";
 import { getCollection } from 'astro:content';
 
 const projects = await getCollection('projects');
+
+// Extract all unique technologies and sort them
+const allTechnologies = [...new Set(
+  projects.flatMap(p => {
+    if ('technologies' in p.data && Array.isArray(p.data.technologies)) {
+      return p.data.technologies as string[];
+    }
+    return [];
+  })
+)].sort();
+
 const pageTitle = "Projects";
 ---
 
 <BaseLayout pageTitle={pageTitle}>
   <h1>{pageTitle}</h1>
+  
+  <button id="filter-toggle" class="filter-toggle" aria-label="Filter by technology">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+    </svg>
+  </button>
+  
+  <div id="filter-bar" class="filter-bar" style="display: none;">
+    <h3>Filter by technology:</h3>
+    <div class="tech-tags">
+      {allTechnologies.map(tech => (
+        <TechTag technology={tech} />
+      ))}
+    </div>
+  </div>
+
   <List items={projects} />
 </BaseLayout>
+
+<script>
+  function setupFilterToggle() {
+    const filterToggle = document.getElementById('filter-toggle');
+    const filterBar = document.getElementById('filter-bar');
+    
+    if (filterToggle && filterBar) {
+      filterToggle.addEventListener('click', () => {
+        const isHidden = filterBar.style.display === 'none' || filterBar.style.display === '';
+        filterBar.style.display = isHidden ? 'block' : 'none';
+        filterToggle.setAttribute('aria-expanded', isHidden.toString());
+      });
+    }
+  }
+
+  // Run on initial page load
+  setupFilterToggle();
+
+  // Re-run after view transitions
+  document.addEventListener('astro:page-load', setupFilterToggle);
+</script>
+
+<style>
+  .filter-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    margin: 1rem 0;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: var(--accent-cyan);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: fit-content;
+  }
+
+  .filter-toggle:hover {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: var(--accent-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
+  }
+
+  .filter-toggle svg {
+    stroke: var(--accent-cyan);
+  }
+
+  .filter-bar {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+  }
+
+  .filter-bar h3 {
+    margin: 0 0 1rem 0;
+    color: var(--accent-cyan);
+    font-size: 0.9rem;
+    font-family: 'JetBrains Mono', monospace;
+    text-align: center;
+  }
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  @media (max-width: 768px) {
+    .filter-toggle {
+      padding: 0.6rem;
+    }
+
+    .filter-bar {
+      padding: 1rem;
+    }
+
+    .filter-bar h3 {
+      font-size: 0.85rem;
+    }
+  }
+</style>
+

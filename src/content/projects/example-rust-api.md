@@ -8,4 +8,5 @@ link: "https://github.com/cobbinma/example-rust-api"
 image:
   url: "https://images.unsplash.com/photo-1561361398-841b52e4bfbf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&fm=jpg&w=700&fit=max"
   alt: "crab"
+technologies: ["Rust", "PostgreSQL", "Microservices"]
 ---

@@ -8,4 +8,5 @@ link: "https://github.com/cobbinma/gleamql"
 image:
   url: "https://cdn.codersociety.com/uploads/graphql-reasons.png"
   alt: "graphql"
+technologies: ["Gleam", "GraphQL"]
 ---

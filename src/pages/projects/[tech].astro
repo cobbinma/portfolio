@@ -1,0 +1,170 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import List from "../../components/List.astro";
+import TechTag from "../../components/TechTag.astro";
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  const allTechnologies = [...new Set(
+    projects.flatMap(p => p.data.technologies)
+  )];
+  
+  return allTechnologies.map(tech => ({
+    params: { tech: tech.toLowerCase() }
+  }));
+}
+
+const { tech } = Astro.params;
+const projects = await getCollection('projects');
+
+// Filter projects that include this technology (case-insensitive)
+const filteredProjects = projects.filter(project =>
+  project.data.technologies.some(t => t.toLowerCase() === tech?.toLowerCase())
+);
+
+// Get the proper casing for display from the actual technology name
+const displayTech = filteredProjects[0]?.data.technologies.find(
+  t => t.toLowerCase() === tech?.toLowerCase()
+) || tech;
+
+// Get all unique technologies for the filter bar
+const allTechnologies = [...new Set(
+  projects.flatMap(p => p.data.technologies)
+)].sort();
+
+const pageTitle = `Projects using ${displayTech}`;
+---
+
+<BaseLayout pageTitle={pageTitle}>
+  <div class="header">
+    <a href="/projects" class="back-link">← View All Projects</a>
+    <h1>{pageTitle}</h1>
+    <p class="project-count">Showing {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''}</p>
+  </div>
+
+  <div class="filter-bar">
+    <h3>Filter by technology:</h3>
+    <div class="tech-tags">
+      {allTechnologies.map(technology => (
+        <TechTag 
+          technology={technology} 
+          active={technology.toLowerCase() === tech?.toLowerCase()}
+        />
+      ))}
+    </div>
+  </div>
+
+  {filteredProjects.length > 0 ? (
+    <List items={filteredProjects} />
+  ) : (
+    <div class="empty-state">
+      <p>No projects found using {displayTech}</p>
+      <a href="/projects" class="view-all-btn">View All Projects</a>
+    </div>
+  )}
+</BaseLayout>
+
+<style>
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: var(--accent-cyan);
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+
+  .back-link:hover {
+    transform: translateX(-4px);
+  }
+
+  h1 {
+    margin: 0 0 0.5rem 0;
+  }
+
+  .project-count {
+    color: rgba(255, 255, 255, 0.6);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .filter-bar {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+  }
+
+  .filter-bar h3 {
+    margin: 0 0 1rem 0;
+    color: var(--accent-cyan);
+    font-size: 0.9rem;
+    font-family: 'JetBrains Mono', monospace;
+    text-align: center;
+  }
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+  }
+
+  .empty-state p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1.5rem;
+  }
+
+  .view-all-btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid var(--accent-cyan);
+    border-radius: 6px;
+    color: var(--accent-cyan);
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.3s ease;
+  }
+
+  .view-all-btn:hover {
+    background: rgba(0, 212, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .filter-bar {
+      padding: 1rem;
+    }
+
+    .filter-bar h3 {
+      font-size: 0.85rem;
+    }
+
+    .back-link {
+      font-size: 0.85rem;
+    }
+
+    .project-count {
+      font-size: 0.85rem;
+    }
+  }
+</style>
