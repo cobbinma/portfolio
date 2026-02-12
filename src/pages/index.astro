@@ -7,13 +7,6 @@ const pageTitle = "Matthew Cobbing - Technical Lead";
 
 <BaseLayout pageTitle={pageTitle}>
   <div class="hero-container">
-    <!-- Terminal-style typewriter greeting -->
-    <div class="terminal-greeting">
-      <span class="prompt">&gt;</span> 
-      <span id="typewriter"></span>
-      <span class="cursor">_</span>
-    </div>
-    
     <!-- Profile image with animated glow -->
     <div class="profile-wrapper">
       <Image 
@@ -28,7 +21,13 @@ const pageTitle = "Matthew Cobbing - Technical Lead";
     
     <!-- Name and title -->
     <h1>Matthew Cobbing</h1>
-    <p class="subtitle">Technical Lead at Perkbox</p>
+    
+    <!-- Terminal-style typewriter greeting -->
+    <div class="terminal-greeting">
+      <span class="prompt">&gt;</span> 
+      <span id="typewriter"></span>
+      <span class="cursor">_</span>
+    </div>
     
     <!-- Tech stack badges -->
     <div class="tech-stack">
@@ -74,7 +73,7 @@ const pageTitle = "Matthew Cobbing - Technical Lead";
     font-family: 'JetBrains Mono', monospace;
     font-size: 1.2rem;
     color: var(--accent-green);
-    margin-bottom: 2rem;
+    margin: 0.5rem 0 2rem 0;
     text-align: center;
     min-height: 1.5em;
   }
@@ -89,7 +88,7 @@ const pageTitle = "Matthew Cobbing - Technical Lead";
   .profile-wrapper {
     position: relative;
     display: inline-block;
-    margin: 2rem 0;
+    margin: 2rem 0 1.5rem 0;
     padding: 4px;
   }
 
@@ -131,15 +130,7 @@ const pageTitle = "Matthew Cobbing - Technical Lead";
 
   /* Name and title */
   h1 {
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-    text-align: center;
-  }
-
-  .subtitle {
-    margin: 0 0 2rem 0;
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.7);
+    margin: 1rem 0 0.5rem 0;
     text-align: center;
   }
 
