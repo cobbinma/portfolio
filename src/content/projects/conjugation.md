@@ -1,0 +1,11 @@
+---
+title: Conjugation
+pubDate: 2023-09-23T09:00:00.000Z
+description: Interactive game for practicing Spanish verb conjugations. Built with Rust backend and Svelte frontend.
+type: page
+topic: project
+link: "https://spanish.cobbing.dev"
+image:
+  url: "https://images.unsplash.com/photo-1709740198353-df155e1acf36?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  alt: "Spanish language learning interface"
+---
